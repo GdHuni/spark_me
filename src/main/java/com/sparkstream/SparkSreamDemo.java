@@ -12,7 +12,7 @@ import scala.Tuple2;
 import java.util.Arrays;
 
 /**
- * @功能描述:
+ * @功能描述:   从流中直接获取数据来计算
  * @项目版本:
  * @相对路径: com.sparkstream.SparkSreamDemo
  * @创建作者: huni
