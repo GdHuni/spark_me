@@ -1,3 +1,4 @@
+package com.sparkstream;/*
 package com.sparkstream;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -15,13 +16,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * @功能描述: spark连接Kafak的demo案例
  * @项目版本:
  * @相对路径: com.sparkstream.SparkKafkaDemo
  * @创建作者: huni
  * @创建日期: 2019/3/31 21:04
- */
+ *//*
+
 public class SparkKafkaDemo {
     public static void main(String[] args) {
         String brokers = "master:9092";
@@ -41,8 +44,10 @@ public class SparkKafkaDemo {
         kafkaParams.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         //设置该参数并且设置ConsumerStrategies.Subscribe(topics,kafkaParams,offsets)spark就会重复消费kafka(一直从头开始)
-        /*Map<TopicPartition, Long> offsets = new HashMap<>();
-        offsets.put(new TopicPartition("new", 1), 2L);*/
+        */
+/*Map<TopicPartition, Long> offsets = new HashMap<>();
+        offsets.put(new TopicPartition("new", 1), 2L);*//*
+
 
         //通过KafkaUtils.createDirectStream(...)获得kafka数据，kafka相关参数由kafkaParams指定
         JavaInputDStream<ConsumerRecord<Object, Object>> lines = KafkaUtils.createDirectStream(
@@ -63,11 +68,13 @@ public class SparkKafkaDemo {
             OffsetRange[] offsetRanges = ((HasOffsetRanges) rdd.rdd()).offsetRanges();
             ((CanCommitOffsets) lines.inputDStream()).commitAsync(offsetRanges);
             //获取偏移量
-          /*  rdd.foreachPartition(consumerRecords -> {
+          */
+/*  rdd.foreachPartition(consumerRecords -> {
                 OffsetRange o = offsetRanges[TaskContext.get().partitionId()];
                 System.out.println(
                         o.topic() + " " + o.partition() + " " + o.fromOffset() + " " + o.untilOffset());
-            });*/
+            });*//*
+
         });
 
         lines.foreachRDD(rdd -> {
@@ -86,3 +93,4 @@ public class SparkKafkaDemo {
 
     }
 }
+*/

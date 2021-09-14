@@ -1,3 +1,4 @@
+package com.sparkstream;/*
 package com.sparkstream;
 
 import org.apache.spark.SparkConf;
@@ -11,13 +12,15 @@ import scala.Tuple2;
 
 import java.util.Arrays;
 
+*/
 /**
  * @功能描述:   从流中直接获取数据来计算
  * @项目版本:
  * @相对路径: com.sparkstream.SparkSreamDemo
  * @创建作者: huni
  * @创建日期: 2019/3/31 20:52
- */
+ *//*
+
 public class SparkSreamDemo {
     public static void main(String[] args) throws InterruptedException {
         //local后面参数必须设置大于1，因为要多线程去处理，只有1的话他就只会运行接收器，而无法运行处理器了（接收器一直运行）
@@ -32,10 +35,12 @@ public class SparkSreamDemo {
         JavaDStream<String> words = lines.flatMap(x -> Arrays.asList(x.split(" ")).iterator());
         JavaPairDStream<String, Integer> pairs = words.mapToPair(s -> new Tuple2<>(s, 1));
         JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey((i1, i2) -> i1 + i2);
-        /*JavaPairDStream<String, Integer> counts =
+        */
+/*JavaPairDStream<String, Integer> counts =
                 lines.flatMap(x->Arrays.asList(x.split(" ")).iterator())
                         .mapToPair(x -> new Tuple2<String, Integer>(x, 1))
-                        .reduceByKey((z, y) -> z + y);*/
+                        .reduceByKey((z, y) -> z + y);*//*
+
 
         // Print the first ten elements of each RDD generated in this DStream to the console
         wordCounts.print();
@@ -45,3 +50,4 @@ public class SparkSreamDemo {
 
     }
 }
+*/
