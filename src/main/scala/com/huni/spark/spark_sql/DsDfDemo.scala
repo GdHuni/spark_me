@@ -8,7 +8,12 @@ import org.apache.spark.sql.types.StructType
 import java.lang
 
 case class Person(name:String, age:Int, height:Int)
-
+/**
+ * @Classname RowAndSchemaDemo
+ * @Description DataFram和DataSet创建的demo案例
+ * @Date 2021/9/26 18:26
+ * @Created by huni
+ */
 object DsDfDemo {
   def main(args: Array[String]): Unit = {
     //DataFrame(DataFrame = RDD[Row] + Schema):
@@ -44,9 +49,8 @@ object DsDfDemo {
     val partitions: Int = numDS.rdd.getNumPartitions
     println(partitions)
 
+
     //==============================通过集合创建ds=====================================
-
-
     val persons = List(Person("zhan", 18, 10), Person("lisi", 19, 22))
     val rdd: RDD[Person] = sc.makeRDD(persons)
     val ds: Dataset[Person] = rdd.toDS()
@@ -56,7 +60,8 @@ object DsDfDemo {
     ds1.show
     ds2.show
 
-    //==============================通过集合创建ds=====================================
+
+    //==============================通过集合创建df=====================================
     val lst = List(("Jack", 28, 184), ("Tom", 10, 144), ("Andy", 16, 165))
     val df1: DataFrame = spark.createDataFrame(lst)
       .withColumnRenamed("_1", "name1")
@@ -65,8 +70,8 @@ object DsDfDemo {
     df1.orderBy("age1").show(10)
 
     // 修改整个DF的列名
-    val df2 = spark.createDataFrame(lst).toDF()
-    val frame: DataFrame = lst.toDF()
+    val df2 = spark.createDataFrame(lst).toDF("name","age","height")
+    val frame: DataFrame = lst.toDF("name","age","height")
     df2.orderBy("age").show(10)
     frame.orderBy("age").show(10)
 
@@ -74,6 +79,7 @@ object DsDfDemo {
 
 
 
+    //关闭资源
     spark.close()
 
 
