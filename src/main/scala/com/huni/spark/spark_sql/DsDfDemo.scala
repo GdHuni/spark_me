@@ -8,6 +8,7 @@ import org.apache.spark.sql.types.StructType
 import java.lang
 
 case class Person(name:String, age:Int, height:Int)
+case class Info(name:String, age:Int, job:String)
 /**
  * @Classname RowAndSchemaDemo
  * @Description DataFram和DataSet创建的demo案例
@@ -118,7 +119,7 @@ object DsDfDemo {
     df6.printSchema()
     df6.show()
 
-    // 自动类型推断
+    // 把第一行数据当字段名，使用;作为分割符,自动类型推断
     val df7: DataFrame = spark.read
       .option("header","true")
       .option("delimiter",";")
@@ -132,8 +133,8 @@ object DsDfDemo {
     ds.toDF()
     ds.rdd
     //df ==> ds,rdd
-    case class Coltest(col1:String,col2:Int)extends Serializable //定义字段名和类型
-    df7.as[Coltest]
+
+    df7.as[Info]
     df7.rdd
 
     //rdd ==> ds,df //Dataset = RDD[case class]  DataFrame = RDD[Row] + Schema
